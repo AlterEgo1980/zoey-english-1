@@ -13,7 +13,6 @@
         .menu-btn:hover { background-color: #357abd; transform: scale(1.02); }
         .hidden { display: none; }
         .word-box { font-size: 28px; font-weight: bold; margin-bottom: 20px; color: #34495e; }
-        .hint { font-size: 16px; color: #7f8c8d; margin-bottom: 10px; font-style: italic; }
         input[type="text"] { width: 90%; padding: 12px; font-size: 18px; border: 2px solid #4a90e2; border-radius: 10px; margin-bottom: 15px; text-align: center; outline: none; }
         .feedback { padding: 15px; border-radius: 10px; margin-top: 15px; font-weight: bold; }
         .correct { background-color: #2ecc71; color: white; }
@@ -24,7 +23,16 @@
         .opt-btn { background: #fff; border: 2px solid #4a90e2; color: #4a90e2; padding: 12px; margin: 6px; width: 100%; border-radius: 10px; cursor: pointer; font-size: 16px; font-weight: bold; transition: 0.2s; text-align: left; direction: ltr; }
         .opt-btn:hover { background: #eef6ff; }
         .sentence-box { font-size: 20px; line-height: 1.6; margin-bottom: 20px; background: #fdfdfd; padding: 20px; border-radius: 15px; border-right: 6px solid #8e44ad; text-align: left; direction: ltr; }
-        .pos { font-size: 14px; color: #e67e22; font-weight: normal; margin-left: 5px; }
+        
+        /* Help Button & Modal */
+        .help-btn { background-color: #9b59b6; color: white; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 14px; margin-bottom: 10px; display: inline-flex; align-items: center; gap: 5px; }
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); }
+        .modal-content { background-color: white; margin: 5% auto; padding: 20px; border-radius: 15px; width: 90%; max-width: 550px; max-height: 85vh; overflow-y: auto; text-align: right; }
+        .close { color: #aaa; float: left; font-size: 28px; font-weight: bold; cursor: pointer; }
+        .guide-table { width: 100%; border-collapse: collapse; margin-top: 10px; direction: ltr; font-size: 13px; }
+        .guide-table th, .guide-table td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        .guide-table th { background-color: #f4f4f4; }
+        h4 { color: #8e44ad; margin-bottom: 5px; margin-top: 15px; }
     </style>
 </head>
 <body>
@@ -34,23 +42,27 @@
         <div class="stars">⭐⭐⭐</div>
         <h1>Zoey's English App</h1>
         <div class="stars">⭐⭐⭐</div>
-        <p>בחרי תרגול (82 מילים במאגר):</p>
         <button class="menu-btn" onclick="startSession(1)">אנגלית ← עברית</button>
         <button class="menu-btn" onclick="startSession(2)">עברית ← אנגלית</button>
         <button class="menu-btn" onclick="startSession(3)">כתיבה (עברית ל-אנגלית)</button>
-        <button class="menu-btn" style="background-color: #8e44ad;" onclick="startSession(5)">השלמת משפטים (מקיף 82 מילים)</button>
+        <button class="menu-btn" onclick="startSession(5)">השלמת משפטים (אוצר מילים)</button>
+        <button class="menu-btn" style="background-color: #e67e22;" onclick="startSession(6)">דקדוק: Past Simple / Progressive ✍️</button>
     </div>
 
     <div id="game-zone" class="hidden">
         <div class="score-display">שאלה <span id="q-num">1</span> מתוך 10</div>
+        
+        <button class="help-btn" onclick="toggleHelp()">💡 דף עזרה בדקדוק</button>
+
         <div id="sentence-container" class="sentence-box hidden"></div>
         <div class="word-box" id="display-word"></div>
-        <div id="hint-text" class="hint"></div>
+        
         <div id="options-area"></div>
         <div id="input-area" class="hidden">
-            <input type="text" id="user-input" autocomplete="off" placeholder="כתבי כאן...">
+            <input type="text" id="user-input" autocomplete="off" placeholder="כתבי את ההטיה הנכונה...">
             <button class="next-btn" onclick="checkAnswer()">בדיקה</button>
         </div>
+
         <div id="feedback" class="feedback hidden"></div>
         <button id="next-btn" class="next-btn hidden" style="margin-top:10px; background-color: #27ae60;" onclick="nextQuestion()">המשיכי ➔</button>
         <button class="menu-btn" style="background: none; color: #95a5a6; font-size: 13px; text-decoration: underline;" onclick="returnToMenu()">חזרה לתפריט</button>
@@ -63,9 +75,37 @@
     </div>
 </div>
 
+<div id="helpModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="toggleHelp()">&times;</span>
+        <h2 style="text-align: center;">כללי דקדוק: עבר</h2>
+        <hr>
+        
+        <h4>1. Past Simple (עבר פשוט)</h4>
+        <p><b>מתי?</b> פעולה שהסתיימה בזמן ידוע (yesterday, last week, 2 years ago).</p>
+        <table class="guide-table">
+            <tr><th>חיוב</th><td>V2 (ed / Irregular) -> I <b>walked</b></td></tr>
+            <tr><th>שלילה</th><td>didn't + V1 -> I <b>didn't walk</b></td></tr>
+            <tr><th>שאלה</th><td>Did + subject + V1? -> <b>Did</b> you <b>walk</b>?</td></tr>
+        </table>
+
+        <h4>2. Past Progressive (עבר ממושך)</h4>
+        <p><b>מתי?</b> פעולה שנמשכה זמן מה בעבר, או פעולה רקע שנקטעה ע"י משהו אחר (לרוב עם While/As).</p>
+        <table class="guide-table">
+            <tr><th>חיוב</th><td>was/were + V-ing -> I <b>was walking</b></td></tr>
+            <tr><th>שלילה</th><td>wasn't/weren't + V-ing -> They <b>weren't walking</b></td></tr>
+            <tr><th>שאלה</th><td>Was/Were + subj + V-ing? -> <b>Were</b> you <b>walking</b>?</td></tr>
+        </table>
+        
+        <p style="font-size: 12px; margin-top: 15px; background: #fff3cd; padding: 5px; border-radius: 5px;">
+            <b>טיפ:</b> אם יש <b>While</b>, לרוב נשתמש ב-Progressive. אם יש <b>When</b>, הפעולה שבאה מיד אחריו היא בדרך כלל Simple.
+        </p>
+    </div>
+</div>
+
 <script>
+    // Copy the full vocabulary and grammarQuestions from previous version here
     const vocabulary = [
-        // Part 1 & 2 combined - Total 82 items
         {e: "active", h: "פעיל", p: "(adj)", s: "She is very ______ in sports and plays every day."},
         {e: "apology", h: "התנצלות", p: "(for) (n)", s: "He sent a sincere ______ for being late."},
         {e: "as well", h: "גם", p: "", s: "I like pizza, and I like pasta ______."},
@@ -82,78 +122,106 @@
         {e: "deal with", h: "להתמודד עם", p: "(v)", s: "How do you ______ stressful situations?"},
         {e: "demand", h: "דרישה", p: "(for) (n, v)", s: "There is a high ______ for new iPhones."},
         {e: "differ", h: "להיות שונה", p: "(from) (v)", s: "How does this car ______ from that one?"},
-        {e: "e.g.", h: "למשל", p: "", s: "You can buy many fruits, ______ apples and oranges."},
-        {e: "figure", h: "דמות/מספר/גזרה", p: "(n)", s: "He is a famous ______ in the history of science."},
+        {e: "figure", h: "דמות", p: "(n)", s: "He is a famous ______ in history."},
         {e: "find out", h: "לגלות", p: "(v)", s: "I need to ______ where she lives."},
         {e: "give in", h: "לוותר/להיכנע", p: "(v)", s: "The enemy finally had to ______."},
-        {e: "in addition", h: "בנוסף", p: "", s: "______, we need to think about the cost."},
         {e: "kick", h: "בעיטה", p: "(n, v)", s: "He gave the ball a strong ______."},
         {e: "lack", h: "חוסר", p: "(of) (n, v)", s: "The plants died because of a ______ of water."},
         {e: "leave out", h: "להשמיט", p: "(v)", s: "Don't ______ any names on the list."},
-        {e: "look", h: "להביט", p: "(v)", s: "Please ______ at the whiteboard."},
         {e: "maintenance", h: "תחזוקה", p: "(n)", s: "Car ______ can be very expensive."},
-        {e: "majority", h: "רוב", p: "(of) (n)", s: "The ______ of students prefer summer over winter."},
-        {e: "more and more", h: "יותר ויותר", p: "", s: "______ people are using electric cars today."},
-        {e: "overseas", h: "מעבר לים", p: "(adj, adv)", s: "They love to travel ______, especially to Europe."},
-        {e: "principal", h: "עיקרי", p: "(adj)", s: "The ______ reason I am here is to help you."},
-        {e: "push", h: "דחיפה", p: "(n, v)", s: "If the door is stuck, give it a ______."},
+        {e: "majority", h: "רוב", p: "(of) (n)", s: "The ______ of students prefer summer."},
+        {e: "principal", h: "עיקרי", p: "(adj)", s: "The ______ reason I am here is to help."},
         {e: "refuse", h: "לסרב", p: "(v)", s: "I ______ to eat broccoli!"},
-        {e: "regular", h: "קבוע/רגיל", p: "(adj)", s: "He has a ______ job and works every Monday."},
-        {e: "side", h: "צד", p: "(n)", s: "Which ______ of the bed do you prefer?"},
-        {e: "social", h: "חברתי", p: "(adj)", s: "She is a very ______ person and has many friends."},
+        {e: "social", h: "חברתי", p: "(adj)", s: "She is a very ______ person."},
         {e: "source", h: "מקור", p: "(of) (n)", s: "The sun is our main ______ of light."},
-        {e: "strike", h: "שביתה/מכה", p: "(n, v)", s: "The teachers went on a ______ for better pay."},
-        {e: "tend", h: "נוטה ל", p: "(to) (v)", s: "I ______ to get sleepy after a big meal."},
-        {e: "through", h: "דרך", p: "(prep)", s: "We walked ______ the forest to get home."},
-        {e: "treat", h: "להתייחס/לטפל", p: "(v)", s: "You should ______ others with respect."},
-        {e: "unable", h: "לא מסוגל", p: "(adj)", s: "I am ______ to open this jar."},
-        {e: "unfriendly", h: "לא ידידותי", p: "(adj)", s: "The new neighbor seems a bit ______."},
+        {e: "strike", h: "שביתה", p: "(n, v)", s: "The teachers went on a ______."},
+        {e: "tend", h: "נוטה ל", p: "(to) (v)", s: "I ______ to get sleepy after a meal."},
+        {e: "treat", h: "להתייחס", p: "(v)", s: "You should ______ others with respect."},
         {e: "victim", h: "קורבן", p: "(n)", s: "The ______ of the robbery was not hurt."},
         {e: "affect", h: "להשפיע", p: "(v)", s: "The weather can ______ our mood."},
-        {e: "aim", h: "מטרה/לכוון", p: "(n, v)", s: "Our ______ is to finish the project by Friday."},
+        {e: "aim", h: "מטרה", p: "(n, v)", s: "Our ______ is to finish by Friday."},
         {e: "anticipate", h: "לצפות", p: "(v)", s: "We ______ that the party will be great."},
-        {e: "as soon as", h: "ברגע ש", p: "", s: "Call me ______ you arrive."},
-        {e: "attitude", h: "גישה", p: "(n)", s: "She has a very positive ______ toward life."},
+        {e: "attitude", h: "גישה", p: "(n)", s: "She has a positive ______."},
         {e: "behavior", h: "התנהגות", p: "(n)", s: "His ______ in class was excellent."},
-        {e: "can", h: "פחית", p: "(n)", s: "I drank a ______ of soda."},
-        {e: "comment", h: "תגובה/להגיב", p: "(n, v)", s: "Do you have any ______s about the movie?"},
-        {e: "connect", h: "לחבר", p: "(v)", s: "Please ______ the printer to the computer."},
+        {e: "connect", h: "לחבר", p: "(v)", s: "Please ______ the printer."},
         {e: "create", h: "ליצור", p: "(v)", s: "The artist wants to ______ something unique."},
         {e: "develop", h: "לפתח", p: "(v)", s: "The city began to ______ very fast."},
-        {e: "direction", h: "כיוון", p: "(n)", s: "Which ______ is the train going?"},
-        {e: "fair", h: "הוגן", p: "(adj)", s: "It's not ______ that he got two cookies and I got one."},
+        {e: "fair", h: "הוגן", p: "(adj)", s: "It's not ______ that he got two cookies."},
         {e: "feature", h: "מאפיין", p: "(n, v)", s: "This phone has a great camera ______."},
-        {e: "fight", h: "להילחם", p: "(n, v)", s: "They used to ______ a lot when they were kids."},
+        {e: "fight", h: "להילחם", p: "(n, v)", s: "They used to ______ a lot."},
         {e: "goal", h: "מטרה", p: "(n)", s: "My ______ is to become a pilot."},
-        {e: "immediate", h: "מיידי", p: "(adj)", s: "I need an ______ answer to my question."},
-        {e: "moment", h: "רגע", p: "(n)", s: "Wait just a ______, I'm coming!"},
-        {e: "potential", h: "פוטנציאל", p: "(adj, n)", s: "She has the ______ to be a great leader."},
-        {e: "worried", h: "מודאג", p: "(adj)", s: "I'm ______ about my dog's health."},
-        {e: "that depends", h: "זה תלוי", p: "", s: "Can we go tomorrow? - ______, if it rains we won't."},
-        {e: "it's a deal", h: "עסקנו/סוכם", p: "", s: "I'll give you ten sheקels. - ______, here is the pen."},
-        {e: "social media", h: "רשתות חברתיות", p: "(n)", s: "She spends a lot of time on ______."},
+        {e: "immediate", h: "מיידי", p: "(adj)", s: "I need an ______ answer."},
+        {e: "potential", h: "פוטנציאל", p: "(adj, n)", s: "She has the ______ to be a leader."},
+        {e: "worried", h: "מודאג", p: "(adj)", s: "I'm ______ about my dog."},
         {e: "bullying", h: "בריונות", p: "(n)", s: "The school is fighting against ______."},
-        {e: "confident", h: "בטוח בעצמו", p: "(adj)", s: "He feels ______ about passing the test."},
-        {e: "difference", h: "הבדל", p: "(n)", s: "What is the ______ between these two colors?"},
         {e: "give up", h: "לוותר", p: "(v)", s: "Never ______ on your dreams!"},
-        {e: "look after", h: "לטפל ב", p: "(v)", s: "Can you ______ my cat while I am away?"},
-        {e: "look for", h: "לחפש", p: "(v)", s: "I am ______ing for my lost keys."},
-        {e: "look forward to", h: "לצפות ל", p: "(v)", s: "I ______ meeting you soon."},
-        {e: "mostly", h: "בעיקר", p: "(adv)", s: "The students in this class are ______ girls."},
-        {e: "on the other hand", h: "מצד שני", p: "", s: "It's expensive, but ______ it's high quality."},
-        {e: "refusal", h: "סירוב", p: "(n)", s: "His ______ to help us was surprising."},
-        {e: "regularly", h: "באופן קבוע", p: "(adv)", s: "You should exercise ______."},
-        {e: "socialize", h: "להתחבר חברתית", p: "(v)", s: "It's important to ______ with your classmates."},
-        {e: "treatment", h: "טיפול", p: "(n)", s: "The doctor gave him a new ______."},
-        {e: "unable to", h: "לא מסוגל ל", p: "", s: "He was ______ finish the race."},
-        {e: "victimization", h: "הפיכה לקורבן", p: "(n)", s: "The program aims to stop ______ in schools."},
-        {e: "immediately", h: "מיד", p: "(adv)", s: "Please come here ______!"}
+        {e: "look after", h: "לטפל ב", p: "(v)", s: "Can you ______ my cat?"},
+        {e: "socialize", h: "להתחבר חברתית", p: "(v)", s: "It's important to ______."},
+        {e: "treatment", h: "טיפול", p: "(n)", s: "The doctor gave him a new ______."}
+    ];
+
+    const grammarQuestions = [
+        {s: "Yesterday, I ______ (find out) the truth about the secret.", a: "found out"},
+        {s: "While I ______ (look) for my keys, I found my lost ring.", a: "was looking"},
+        {s: "The bully ______ (kick) the ball over the fence two minutes ago.", a: "kicked"},
+        {s: "They ______ (fight) when the teacher entered the room.", a: "were fighting"},
+        {s: "Last week, she ______ (refuse) to give in to their demands.", a: "refused"},
+        {s: "I ______ (cry) while I was watching that sad movie.", a: "was crying"},
+        {s: "We ______ (beat) the other team in the final game last night.", a: "beat"},
+        {s: "She ______ (treat) me very well when I stayed at her house.", a: "treated"},
+        {s: "While the students ______ (socialize), the bell suddenly rang.", a: "were socializing"},
+        {s: "Yesterday, the source ______ (affect) the entire system.", a: "affected"},
+        {s: "He ______ (claim) that he didn't see anything yesterday.", a: "claimed"},
+        {s: "I ______ (look after) my little brother all afternoon yesterday.", a: "was looking after"},
+        {s: "The teacher ______ (blame) the student for the noise.", a: "blamed"},
+        {s: "When I arrived, they ______ (create) a new art project.", a: "were creating"},
+        {s: "She ______ (develop) a new skill during her summer break.", a: "developed"},
+        {s: "We ______ (anticipate) a better result, but we were wrong.", a: "anticipated"},
+        {s: "While I ______ (bear) the heavy box, I felt a pain in my back.", a: "was bearing"},
+        {s: "The workers ______ (strike) for three days last month.", a: "struck"},
+        {s: "I ______ (belong to) a different club when I was younger.", a: "belonged to"},
+        {s: "While the city ______ (develop), many new parks were built.", a: "was developing"},
+        {s: "He ______ (push) the door open and walked in.", a: "pushed"},
+        {s: "I ______ (tend) to stay up late when I was a student.", a: "tended"},
+        {s: "While they ______ (deal with) the problem, another one appeared.", a: "were dealing with"},
+        {s: "She ______ (leave out) my name from the list by mistake.", a: "left out"},
+        {s: "We ______ (connect) the cables when the power went out.", a: "were connecting"},
+        {s: "I ______ (look forward to) the trip for months.", a: "was looking forward to"},
+        {s: "He ______ (apologize) as soon as he realized his mistake.", a: "apologized"},
+        {s: "The dog ______ (kick) its legs while it was sleeping.", a: "was kicking"},
+        {s: "They ______ (differ) on the subject yesterday.", a: "differed"},
+        {s: "I ______ (find out) the truth just in time.", a: "found out"},
+        {s: "She ______ (cry) because she lost her doll.", a: "was crying"},
+        {s: "We ______ (fight) for our rights during the protest.", a: "were fighting"},
+        {s: "The company ______ (aim) to double its sales last year.", a: "aimed"},
+        {s: "While the cat ______ (look) at the bird, it jumped.", a: "was looking"},
+        {s: "He ______ (give up) on the puzzle after an hour.", a: "gave up"},
+        {s: "The children ______ (bully) the new student when I saw them.", a: "were bullying"},
+        {s: "I ______ (comment) on her post yesterday.", a: "commented"},
+        {s: "The situation ______ (affect) everyone in the office.", a: "affected"},
+        {s: "While she ______ (socialize), she met a famous actor.", a: "was socializing"},
+        {s: "We ______ (look for) a new house for a long time.", a: "were looking for"},
+        {s: "He ______ (beat) his own record yesterday.", a: "beat"},
+        {s: "They ______ (belong to) the same team last season.", a: "belonged to"},
+        {s: "While I ______ (treat) the patient, the phone rang.", a: "was treating"},
+        {s: "She ______ (refuse) to answer at the time.", a: "refused"},
+        {s: "I ______ (anticipate) a quiet night, but it was noisy.", a: "was anticipating"},
+        {s: "He ______ (claim) he was innocent during the trial.", a: "claimed"},
+        {s: "While we ______ (deal with) the crisis, the boss arrived.", a: "were dealing with"},
+        {s: "They ______ (kick) the ball around for hours.", a: "were kicking"},
+        {s: "She ______ (apologize) for her behavior last night.", a: "apologized"},
+        {s: "I ______ (look after) the baby while mom was out.", a: "was looking after"}
     ];
 
     let sessionWords = [];
     let currentIndex = 0;
     let score = 0;
     let currentMode = 0;
+
+    function toggleHelp() {
+        const modal = document.getElementById("helpModal");
+        modal.style.display = (modal.style.display === "block") ? "none" : "block";
+    }
 
     function returnToMenu() {
         document.getElementById('menu').classList.remove('hidden');
@@ -165,7 +233,8 @@
         currentMode = mode;
         score = 0;
         currentIndex = 0;
-        sessionWords = [...vocabulary].sort(() => 0.5 - Math.random()).slice(0, 10);
+        let pool = (mode === 6 ? [...grammarQuestions] : [...vocabulary]);
+        sessionWords = pool.sort(() => 0.5 - Math.random()).slice(0, 10);
         document.getElementById('menu').classList.add('hidden');
         document.getElementById('game-zone').classList.remove('hidden');
         showQuestion();
@@ -178,25 +247,27 @@
         document.getElementById('next-btn').classList.add('hidden');
         document.getElementById('user-input').value = "";
         const display = document.getElementById('display-word');
-        const hint = document.getElementById('hint-text');
         const optionsArea = document.getElementById('options-area');
         const inputArea = document.getElementById('input-area');
         const sentContainer = document.getElementById('sentence-container');
         
         optionsArea.innerHTML = "";
-        hint.innerText = "";
         inputArea.classList.add('hidden');
         sentContainer.classList.add('hidden');
 
-        if (currentMode === 1) { 
-            display.innerHTML = item.e + ` <span class="pos">${item.p}</span>`;
+        if (currentMode === 6) { 
+            sentContainer.classList.remove('hidden');
+            sentContainer.innerText = item.s;
+            display.innerText = "הקלידי את התשובה:";
+            inputArea.classList.remove('hidden');
+        } else if (currentMode === 1) { 
+            display.innerHTML = item.e + ` <span style="font-size:14px; color:#e67e22;">${item.p || ""}</span>`;
             generateOptions(item.h, 'h');
         } else if (currentMode === 2) { 
             display.innerText = item.h;
             generateOptions(item.e, 'e', true);
         } else if (currentMode === 3) { 
             display.innerText = item.h;
-            hint.innerText = "רמז: " + getHint(item.e) + " " + item.p;
             inputArea.classList.remove('hidden');
         } else if (currentMode === 5) { 
             sentContainer.classList.remove('hidden');
@@ -204,12 +275,6 @@
             display.innerText = "בחרי את המילה המתאימה:";
             generateOptions(item.e, 'e', true);
         }
-    }
-
-    function getHint(str) {
-        let parts = str.split(" ");
-        if (parts.length > 1) return parts[0] + " " + parts[1].charAt(0) + "...";
-        return str.charAt(0) + "...";
     }
 
     function generateOptions(correct, key, showPOS = false) {
@@ -223,12 +288,7 @@
         opts.forEach(o => {
             const btn = document.createElement('button');
             btn.className = 'opt-btn';
-            let posSuffix = "";
-            if (showPOS) {
-                let match = vocabulary.find(v => v.e === o || v.h === o);
-                if (match) posSuffix = " " + match.p;
-            }
-            btn.innerText = o + posSuffix;
+            btn.innerText = o;
             btn.onclick = () => {
                 document.querySelectorAll('.opt-btn').forEach(b => b.disabled = true);
                 showFeedback(o === correct, correct);
@@ -240,7 +300,7 @@
     function checkAnswer() {
         const item = sessionWords[currentIndex];
         const input = document.getElementById('user-input').value.trim().toLowerCase();
-        let correctVal = (currentMode === 3 ? item.e : item.h);
+        let correctVal = (currentMode === 6 ? item.a : (currentMode === 3 ? item.e : item.h));
         showFeedback(input === correctVal.toLowerCase(), correctVal);
     }
 
@@ -252,7 +312,7 @@
             f.innerText = "נכון מאוד! ⭐";
             f.className = "feedback correct";
         } else {
-            f.innerHTML = "התשובה הנכונה היא: " + "<span dir='ltr' style='font-weight:bold'>" + correctVal + "</span>";
+            f.innerHTML = "טעות. התשובה הנכונה: " + "<span dir='ltr' style='font-weight:bold'>" + correctVal + "</span>";
             f.className = "feedback incorrect";
         }
         document.getElementById('next-btn').classList.remove('hidden');
@@ -268,6 +328,11 @@
         document.getElementById('game-zone').classList.add('hidden');
         document.getElementById('summary-zone').classList.remove('hidden');
         document.getElementById('final-grade').innerText = (score * 10) + "%";
+    }
+
+    window.onclick = function(event) {
+        const modal = document.getElementById("helpModal");
+        if (event.target == modal) modal.style.display = "none";
     }
 </script>
 </body>
