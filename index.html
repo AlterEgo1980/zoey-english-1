@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zoey's English App ⭐</title>
+    <title>Zoey's English App 2026 ⭐</title>
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f0f7ff; text-align: center; padding: 20px; margin: 0; }
         .container { max-width: 600px; margin: auto; background: white; padding: 25px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 2px solid #e0e0e0; }
@@ -23,16 +23,12 @@
         .opt-btn { background: #fff; border: 2px solid #4a90e2; color: #4a90e2; padding: 12px; margin: 6px; width: 100%; border-radius: 10px; cursor: pointer; font-size: 16px; font-weight: bold; transition: 0.2s; text-align: left; direction: ltr; }
         .opt-btn:hover { background: #eef6ff; }
         .sentence-box { font-size: 20px; line-height: 1.6; margin-bottom: 20px; background: #fdfdfd; padding: 20px; border-radius: 15px; border-right: 6px solid #8e44ad; text-align: left; direction: ltr; }
-        
-        /* Help Button & Modal */
         .help-btn { background-color: #9b59b6; color: white; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 14px; margin-bottom: 10px; display: inline-flex; align-items: center; gap: 5px; }
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); }
         .modal-content { background-color: white; margin: 5% auto; padding: 20px; border-radius: 15px; width: 90%; max-width: 550px; max-height: 85vh; overflow-y: auto; text-align: right; }
         .close { color: #aaa; float: left; font-size: 28px; font-weight: bold; cursor: pointer; }
         .guide-table { width: 100%; border-collapse: collapse; margin-top: 10px; direction: ltr; font-size: 13px; }
         .guide-table th, .guide-table td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        .guide-table th { background-color: #f4f4f4; }
-        h4 { color: #8e44ad; margin-bottom: 5px; margin-top: 15px; }
     </style>
 </head>
 <body>
@@ -51,18 +47,14 @@
 
     <div id="game-zone" class="hidden">
         <div class="score-display">שאלה <span id="q-num">1</span> מתוך 10</div>
-        
         <button class="help-btn" onclick="toggleHelp()">💡 דף עזרה בדקדוק</button>
-
         <div id="sentence-container" class="sentence-box hidden"></div>
         <div class="word-box" id="display-word"></div>
-        
         <div id="options-area"></div>
         <div id="input-area" class="hidden">
-            <input type="text" id="user-input" autocomplete="off" placeholder="כתבי את ההטיה הנכונה...">
+            <input type="text" id="user-input" autocomplete="off" placeholder="הקלידי כאן...">
             <button class="next-btn" onclick="checkAnswer()">בדיקה</button>
         </div>
-
         <div id="feedback" class="feedback hidden"></div>
         <button id="next-btn" class="next-btn hidden" style="margin-top:10px; background-color: #27ae60;" onclick="nextQuestion()">המשיכי ➔</button>
         <button class="menu-btn" style="background: none; color: #95a5a6; font-size: 13px; text-decoration: underline;" onclick="returnToMenu()">חזרה לתפריט</button>
@@ -80,137 +72,116 @@
         <span class="close" onclick="toggleHelp()">&times;</span>
         <h2 style="text-align: center;">כללי דקדוק: עבר</h2>
         <hr>
-        
-        <h4>1. Past Simple (עבר פשוט)</h4>
-        <p><b>מתי?</b> פעולה שהסתיימה בזמן ידוע (yesterday, last week, 2 years ago).</p>
-        <table class="guide-table">
-            <tr><th>חיוב</th><td>V2 (ed / Irregular) -> I <b>walked</b></td></tr>
-            <tr><th>שלילה</th><td>didn't + V1 -> I <b>didn't walk</b></td></tr>
-            <tr><th>שאלה</th><td>Did + subject + V1? -> <b>Did</b> you <b>walk</b>?</td></tr>
-        </table>
-
-        <h4>2. Past Progressive (עבר ממושך)</h4>
-        <p><b>מתי?</b> פעולה שנמשכה זמן מה בעבר, או פעולה רקע שנקטעה ע"י משהו אחר (לרוב עם While/As).</p>
-        <table class="guide-table">
-            <tr><th>חיוב</th><td>was/were + V-ing -> I <b>was walking</b></td></tr>
-            <tr><th>שלילה</th><td>wasn't/weren't + V-ing -> They <b>weren't walking</b></td></tr>
-            <tr><th>שאלה</th><td>Was/Were + subj + V-ing? -> <b>Were</b> you <b>walking</b>?</td></tr>
-        </table>
-        
-        <p style="font-size: 12px; margin-top: 15px; background: #fff3cd; padding: 5px; border-radius: 5px;">
-            <b>טיפ:</b> אם יש <b>While</b>, לרוב נשתמש ב-Progressive. אם יש <b>When</b>, הפעולה שבאה מיד אחריו היא בדרך כלל Simple.
-        </p>
+        <h4>Past Simple (עבר פשוט)</h4>
+        <p>לפעולה שהסתיימה. מילות רמז: yesterday, last year, ago.</p>
+        <p>מבנה: V2 (כמו walked או went).</p>
+        <h4>Past Progressive (עבר ממושך)</h4>
+        <p>לפעולה ארוכה שקרתה בעבר. מילות רמז: While, As.</p>
+        <p>מבנה: was/were + V-ing.</p>
+        <p><b>טיפ:</b> אחרי <b>While</b> יבוא Progressive. אחרי <b>When</b> יבוא לרוב Simple.</p>
     </div>
 </div>
 
 <script>
-    // Copy the full vocabulary and grammarQuestions from previous version here
     const vocabulary = [
-        {e: "active", h: "פעיל", p: "(adj)", s: "She is very ______ in sports and plays every day."},
-        {e: "apology", h: "התנצלות", p: "(for) (n)", s: "He sent a sincere ______ for being late."},
-        {e: "as well", h: "גם", p: "", s: "I like pizza, and I like pasta ______."},
-        {e: "be familiar with", h: "להיות מוכר עם", p: "", s: "Are you ______ with this song?"},
-        {e: "bear", h: "לשאת/לסבול", p: "(v)", s: "I can't ______ the sound of that loud music!"},
-        {e: "beat", h: "להביס/להכות", p: "(v)", s: "Our team managed to ______ the champions."},
-        {e: "belong to", h: "שייך ל", p: "(v)", s: "Does this book ______ you?"},
-        {e: "blame", h: "להאשים", p: "(for) (n, v)", s: "Don't ______ me for the broken window."},
-        {e: "bully", h: "בריון", p: "(n, v)", s: "The school ______ was suspended for a week."},
-        {e: "case", h: "מקרה", p: "(n)", s: "In this ______, we need to call the doctor."},
-        {e: "claim", h: "לטעון", p: "(v)", s: "The company ______s that their product is the best."},
-        {e: "confidence", h: "ביטחון", p: "(n)", s: "She has the ______ to speak in front of everyone."},
-        {e: "cry", h: "לבכות", p: "(for) (v)", s: "Don't ______ over spilled milk."},
-        {e: "deal with", h: "להתמודד עם", p: "(v)", s: "How do you ______ stressful situations?"},
-        {e: "demand", h: "דרישה", p: "(for) (n, v)", s: "There is a high ______ for new iPhones."},
-        {e: "differ", h: "להיות שונה", p: "(from) (v)", s: "How does this car ______ from that one?"},
-        {e: "figure", h: "דמות", p: "(n)", s: "He is a famous ______ in history."},
-        {e: "find out", h: "לגלות", p: "(v)", s: "I need to ______ where she lives."},
-        {e: "give in", h: "לוותר/להיכנע", p: "(v)", s: "The enemy finally had to ______."},
-        {e: "kick", h: "בעיטה", p: "(n, v)", s: "He gave the ball a strong ______."},
-        {e: "lack", h: "חוסר", p: "(of) (n, v)", s: "The plants died because of a ______ of water."},
-        {e: "leave out", h: "להשמיט", p: "(v)", s: "Don't ______ any names on the list."},
-        {e: "maintenance", h: "תחזוקה", p: "(n)", s: "Car ______ can be very expensive."},
-        {e: "majority", h: "רוב", p: "(of) (n)", s: "The ______ of students prefer summer."},
-        {e: "principal", h: "עיקרי", p: "(adj)", s: "The ______ reason I am here is to help."},
-        {e: "refuse", h: "לסרב", p: "(v)", s: "I ______ to eat broccoli!"},
-        {e: "social", h: "חברתי", p: "(adj)", s: "She is a very ______ person."},
-        {e: "source", h: "מקור", p: "(of) (n)", s: "The sun is our main ______ of light."},
-        {e: "strike", h: "שביתה", p: "(n, v)", s: "The teachers went on a ______."},
-        {e: "tend", h: "נוטה ל", p: "(to) (v)", s: "I ______ to get sleepy after a meal."},
-        {e: "treat", h: "להתייחס", p: "(v)", s: "You should ______ others with respect."},
-        {e: "victim", h: "קורבן", p: "(n)", s: "The ______ of the robbery was not hurt."},
-        {e: "affect", h: "להשפיע", p: "(v)", s: "The weather can ______ our mood."},
-        {e: "aim", h: "מטרה", p: "(n, v)", s: "Our ______ is to finish by Friday."},
-        {e: "anticipate", h: "לצפות", p: "(v)", s: "We ______ that the party will be great."},
-        {e: "attitude", h: "גישה", p: "(n)", s: "She has a positive ______."},
-        {e: "behavior", h: "התנהגות", p: "(n)", s: "His ______ in class was excellent."},
-        {e: "connect", h: "לחבר", p: "(v)", s: "Please ______ the printer."},
-        {e: "create", h: "ליצור", p: "(v)", s: "The artist wants to ______ something unique."},
-        {e: "develop", h: "לפתח", p: "(v)", s: "The city began to ______ very fast."},
-        {e: "fair", h: "הוגן", p: "(adj)", s: "It's not ______ that he got two cookies."},
-        {e: "feature", h: "מאפיין", p: "(n, v)", s: "This phone has a great camera ______."},
-        {e: "fight", h: "להילחם", p: "(n, v)", s: "They used to ______ a lot."},
-        {e: "goal", h: "מטרה", p: "(n)", s: "My ______ is to become a pilot."},
-        {e: "immediate", h: "מיידי", p: "(adj)", s: "I need an ______ answer."},
-        {e: "potential", h: "פוטנציאל", p: "(adj, n)", s: "She has the ______ to be a leader."},
-        {e: "worried", h: "מודאג", p: "(adj)", s: "I'm ______ about my dog."},
-        {e: "bullying", h: "בריונות", p: "(n)", s: "The school is fighting against ______."},
-        {e: "give up", h: "לוותר", p: "(v)", s: "Never ______ on your dreams!"},
-        {e: "look after", h: "לטפל ב", p: "(v)", s: "Can you ______ my cat?"},
-        {e: "socialize", h: "להתחבר חברתית", p: "(v)", s: "It's important to ______."},
-        {e: "treatment", h: "טיפול", p: "(n)", s: "The doctor gave him a new ______."}
+        {e: "adapt", h: "להסתגל", s: "It is hard to ______ to a new school at first."},
+        {e: "around", h: "מסביב", s: "We ran ______ the park three times."},
+        {e: "beside", h: "ליד, לצד", s: "Come and sit ______ me on the sofa."},
+        {e: "confident", h: "בטוח", s: "She feels ______ about her English exam."},
+        {e: "escape", h: "לברוח", s: "The bird managed to ______ from the cage."},
+        {e: "force", h: "להכריח", s: "You can't ______ me to eat broccoli!"},
+        {e: "help oneself", h: "להתכבד", s: "Please ______ to some cookies on the table."},
+        {e: "introduce", h: "להציג", s: "Let me ______ you to my best friend."},
+        {e: "lake", h: "אגם", s: "We went swimming in the ______ last summer."},
+        {e: "noisy", h: "רועש", s: "The classroom was very ______ during the break."},
+        {e: "occur", h: "להתרחש", s: "When did the accident ______?"},
+        {e: "region", h: "איזור", s: "It rains a lot in this ______ of the country."},
+        {e: "relax", h: "להירגע", s: "I like to ______ and read a book on Saturdays."},
+        {e: "rise", h: "עלייה", s: "There is a ______ in the number of people using apps."},
+        {e: "space", h: "מרחב, מקום", s: "Is there enough ______ in the car for everyone?"},
+        {e: "surprisingly", h: "באופן מפתיע", s: "______, the test was actually quite easy."},
+        {e: "to do with", h: "קשור ל", s: "This problem has nothing ______ me."},
+        {e: "trend", h: "מגמה", s: "There is a new ______ of wearing vintage clothes."},
+        {e: "adequate", h: "מספיק", s: "The food supply was ______ for the trip."},
+        {e: "attack", h: "לתקוף", s: "The dog began to ______ the fence."},
+        {e: "cause", h: "לגרום", s: "Smoking can ______ serious health problems."},
+        {e: "disease", h: "מחלה", s: "Doctors are working hard to cure the ______."},
+        {e: "expensive", h: "יקר", s: "This watch is too ______ for me to buy."},
+        {e: "look after", h: "לטפל", s: "Can you ______ my cat while I'm away?"},
+        {e: "make something into", h: "להפוך ל", s: "She can ______ old clothes ______ something new."},
+        {e: "release", h: "לשחרר", s: "They will ______ the animals back into the wild."},
+        {e: "satisfied", h: "מסופק", s: "I am very ______ with my final grade."},
+        {e: "aim", h: "מטרה", s: "My ______ is to finish the marathon."},
+        {e: "allow", h: "להרשות", s: "My parents ______ me to stay up late on weekends."},
+        {e: "demand", h: "לדרוש", s: "The workers ______ better working conditions."},
+        {e: "despite", h: "למרות", s: "We went for a walk ______ the rain."},
+        {e: "head", h: "ראש", s: "He is the ______ of the company."},
+        {e: "nearby", h: "קרוב", s: "Is there a supermarket ______?"},
+        {e: "option", h: "אפשרות", s: "I have the ______ to study either French or Spanish."},
+        {e: "permanent", h: "קבוע", s: "This is my ______ address, I won't move."},
+        {e: "plan to", h: "לתכנן ל", s: "I ______ travel to London next year."},
+        {e: "property", h: "רכוש", s: "This bag is my private ______."},
+        {e: "temporary", h: "זמני", s: "It's just a ______ job for the summer."},
+        {e: "abroad", h: "בחו\"ל", s: "Many people love to travel ______."},
+        {e: "add", h: "להוסיף", s: "Don't forget to ______ some salt to the soup."},
+        {e: "aid", h: "עזרה, סיוע", s: "The organization provides ______ to poor families."},
+        {e: "border", h: "גבול", s: "We crossed the ______ between France and Italy."},
+        {e: "channel", h: "ערוץ", s: "What is your favorite TV ______?"},
+        {e: "comfort", h: "נוח", s: "I love the ______ of my own bed."},
+        {e: "community", h: "קהילה", s: "We live in a very friendly ______."},
+        {e: "concerned", h: "מודאג", s: "I am ______ about your health."},
+        {e: "cover", h: "לכסות", s: "Please ______ the food so it stays fresh."},
+        {e: "few", h: "מעטים", s: "Only a ______ people arrived on time."},
+        {e: "institution", h: "מוסד", s: "The university is a famous ______."},
+        {e: "jet", h: "מטוס סילון", s: "The ______ flew across the ocean very fast."},
+        {e: "joy", h: "אושר", s: "The children brought so much ______ to the family."},
+        {e: "kind", h: "טוב לב", s: "Thank you for being so ______ to me."},
+        {e: "offer", h: "להציע", s: "They ______ed me a drink when I arrived."},
+        {e: "philosophy", h: "פילוסופיה", s: "He has a very interesting ______ on life."},
+        {e: "provide", h: "לספק", s: "The school will ______ all the books."},
+        {e: "society", h: "חברה", s: "We must work together to improve our ______."},
+        {e: "brave", h: "אמיץ", s: "The ______ firefighter saved the cat."},
+        {e: "concern", h: "דאגה", s: "The teacher showed ______ for the student."},
+        {e: "destroy", h: "להרוס", s: "The storm ______ed many houses."},
+        {e: "gun", h: "אקדח", s: "He carries a ______ for protection."},
+        {e: "gunfire", h: "יריה", s: "The sound of ______ was heard in the distance."},
+        {e: "killing", h: "הרג", s: "The movie was about the ______ of a king."},
+        {e: "point of view", h: "נקודת מבט", s: "From my ______, this is the best choice."},
+        {e: "shoot", h: "לירות", s: "The hunter did not ______ the deer."},
+        {e: "take care of", h: "לטפל ב", s: "I will ______ the baby tonight."}
     ];
 
     const grammarQuestions = [
-        {s: "Yesterday, I ______ (find out) the truth about the secret.", a: "found out"},
-        {s: "While I ______ (look) for my keys, I found my lost ring.", a: "was looking"},
-        {s: "The bully ______ (kick) the ball over the fence two minutes ago.", a: "kicked"},
-        {s: "They ______ (fight) when the teacher entered the room.", a: "were fighting"},
-        {s: "Last week, she ______ (refuse) to give in to their demands.", a: "refused"},
-        {s: "I ______ (cry) while I was watching that sad movie.", a: "was crying"},
-        {s: "We ______ (beat) the other team in the final game last night.", a: "beat"},
-        {s: "She ______ (treat) me very well when I stayed at her house.", a: "treated"},
-        {s: "While the students ______ (socialize), the bell suddenly rang.", a: "were socializing"},
-        {s: "Yesterday, the source ______ (affect) the entire system.", a: "affected"},
-        {s: "He ______ (claim) that he didn't see anything yesterday.", a: "claimed"},
-        {s: "I ______ (look after) my little brother all afternoon yesterday.", a: "was looking after"},
-        {s: "The teacher ______ (blame) the student for the noise.", a: "blamed"},
-        {s: "When I arrived, they ______ (create) a new art project.", a: "were creating"},
-        {s: "She ______ (develop) a new skill during her summer break.", a: "developed"},
-        {s: "We ______ (anticipate) a better result, but we were wrong.", a: "anticipated"},
-        {s: "While I ______ (bear) the heavy box, I felt a pain in my back.", a: "was bearing"},
-        {s: "The workers ______ (strike) for three days last month.", a: "struck"},
-        {s: "I ______ (belong to) a different club when I was younger.", a: "belonged to"},
-        {s: "While the city ______ (develop), many new parks were built.", a: "was developing"},
-        {s: "He ______ (push) the door open and walked in.", a: "pushed"},
-        {s: "I ______ (tend) to stay up late when I was a student.", a: "tended"},
-        {s: "While they ______ (deal with) the problem, another one appeared.", a: "were dealing with"},
-        {s: "She ______ (leave out) my name from the list by mistake.", a: "left out"},
-        {s: "We ______ (connect) the cables when the power went out.", a: "were connecting"},
-        {s: "I ______ (look forward to) the trip for months.", a: "was looking forward to"},
-        {s: "He ______ (apologize) as soon as he realized his mistake.", a: "apologized"},
-        {s: "The dog ______ (kick) its legs while it was sleeping.", a: "was kicking"},
-        {s: "They ______ (differ) on the subject yesterday.", a: "differed"},
-        {s: "I ______ (find out) the truth just in time.", a: "found out"},
-        {s: "She ______ (cry) because she lost her doll.", a: "was crying"},
-        {s: "We ______ (fight) for our rights during the protest.", a: "were fighting"},
-        {s: "The company ______ (aim) to double its sales last year.", a: "aimed"},
-        {s: "While the cat ______ (look) at the bird, it jumped.", a: "was looking"},
-        {s: "He ______ (give up) on the puzzle after an hour.", a: "gave up"},
-        {s: "The children ______ (bully) the new student when I saw them.", a: "were bullying"},
-        {s: "I ______ (comment) on her post yesterday.", a: "commented"},
-        {s: "The situation ______ (affect) everyone in the office.", a: "affected"},
-        {s: "While she ______ (socialize), she met a famous actor.", a: "was socializing"},
-        {s: "We ______ (look for) a new house for a long time.", a: "were looking for"},
-        {s: "He ______ (beat) his own record yesterday.", a: "beat"},
-        {s: "They ______ (belong to) the same team last season.", a: "belonged to"},
-        {s: "While I ______ (treat) the patient, the phone rang.", a: "was treating"},
-        {s: "She ______ (refuse) to answer at the time.", a: "refused"},
-        {s: "I ______ (anticipate) a quiet night, but it was noisy.", a: "was anticipating"},
-        {s: "He ______ (claim) he was innocent during the trial.", a: "claimed"},
-        {s: "While we ______ (deal with) the crisis, the boss arrived.", a: "were dealing with"},
-        {s: "They ______ (kick) the ball around for hours.", a: "were kicking"},
-        {s: "She ______ (apologize) for her behavior last night.", a: "apologized"},
-        {s: "I ______ (look after) the baby while mom was out.", a: "was looking after"}
+        {s: "While the brave soldier ______ (look after) the border, he heard gunfire.", a: "was looking after"},
+        {s: "The institution ______ (provide) adequate aid to the community last year.", a: "provided"},
+        {s: "As we ______ (relax) beside the lake, a noisy jet flew over the region.", a: "were relaxing"},
+        {s: "Surprisingly, the expensive property ______ (rise) in price last month.", a: "rose"},
+        {s: "Despite the disease, she ______ (remain) confident that she would recover.", a: "remained"},
+        {s: "While they ______ (plan to) travel abroad, they added a new option to their list.", a: "were planning to"},
+        {s: "When the accident ______ (occur), the police were blocking the space around the car.", a: "occurred"},
+        {s: "The noisy neighbors ______ (destroy) my comfort while I was trying to sleep.", a: "destroyed"},
+        {s: "He ______ (force) the bird to escape from the cage yesterday.", a: "forced"},
+        {s: "While I ______ (take care of) the garden, I found a temporary border.", a: "was taking care of"},
+        {s: "The philosophy teacher ______ (introduce) a new trend during the lesson.", a: "introduced"},
+        {s: "They ______ (demand) a permanent solution while the society was suffering.", a: "demanded"},
+        {s: "As the head of the team ______ (offer) an option, everyone felt satisfied.", a: "was offering"},
+        {s: "The gunfire ______ (cause) great concern in the nearby village.", a: "caused"},
+        {s: "While the cat ______ (attack) the mouse, it made a noisy sound.", a: "was attacking"},
+        {s: "I ______ (help oneself) to the food while the host was talking about his trip.", a: "helped myself"},
+        {s: "While we ______ (walk) around the lake, we adapted to the cold weather.", a: "were walking"},
+        {s: "The trend ______ (change) while the institution was studying the region.", a: "changed"},
+        {s: "He ______ (shoot) the target while everyone was watching him.", a: "shot"},
+        {s: "While she ______ (cover) the expensive furniture, she broke a vase.", a: "was covering"},
+        {s: "The killing ______ (cause) a big shock while the police were investigating.", a: "caused"},
+        {s: "As we ______ (walk) around the region, we saw very few trees.", a: "were walking"},
+        {s: "He ______ (not/demand) an apology while we were sitting beside him.", a: "didn't demand"},
+        {s: "While the brave girl ______ (look after) her brother, they played in the space.", a: "was looking after"},
+        {s: "The jet ______ (fly) over the border while the pilot was talking to the base.", a: "was flying"},
+        {s: "We ______ (find) a permanent home while we were living abroad.", a: "found"},
+        {s: "While the community ______ (discuss) the option, a new problem occurred.", a: "was discussing"},
+        {s: "He ______ (not/be) confident while he was presenting his point of view.", a: "wasn't"},
+        {s: "As the sun ______ (rise), we started our long walk around the lake.", a: "was rising"},
+        {s: "The philosophy ______ (change) while the society was developing.", a: "changed"}
     ];
 
     let sessionWords = [];
@@ -258,14 +229,14 @@
         if (currentMode === 6) { 
             sentContainer.classList.remove('hidden');
             sentContainer.innerText = item.s;
-            display.innerText = "הקלידי את התשובה:";
+            display.innerText = "הקלידי את ההטיה הנכונה:";
             inputArea.classList.remove('hidden');
         } else if (currentMode === 1) { 
-            display.innerHTML = item.e + ` <span style="font-size:14px; color:#e67e22;">${item.p || ""}</span>`;
+            display.innerText = item.e;
             generateOptions(item.h, 'h');
         } else if (currentMode === 2) { 
             display.innerText = item.h;
-            generateOptions(item.e, 'e', true);
+            generateOptions(item.e, 'e');
         } else if (currentMode === 3) { 
             display.innerText = item.h;
             inputArea.classList.remove('hidden');
@@ -273,13 +244,13 @@
             sentContainer.classList.remove('hidden');
             sentContainer.innerText = item.s;
             display.innerText = "בחרי את המילה המתאימה:";
-            generateOptions(item.e, 'e', true);
+            generateOptions(item.e, 'e');
         }
     }
 
-    function generateOptions(correct, key, showPOS = false) {
+    function generateOptions(correct, key) {
         let opts = [correct];
-        while(opts.length < 5) {
+        while(opts.length < 4) {
             let rand = vocabulary[Math.floor(Math.random() * vocabulary.length)];
             let val = (key === 'e' ? rand.e : rand.h);
             if(!opts.includes(val)) opts.push(val);
@@ -300,7 +271,7 @@
     function checkAnswer() {
         const item = sessionWords[currentIndex];
         const input = document.getElementById('user-input').value.trim().toLowerCase();
-        let correctVal = (currentMode === 6 ? item.a : (currentMode === 3 ? item.e : item.h));
+        let correctVal = (currentMode === 6 ? item.a : item.e);
         showFeedback(input === correctVal.toLowerCase(), correctVal);
     }
 
@@ -309,10 +280,10 @@
         f.classList.remove('hidden');
         if(isCorrect) {
             score++;
-            f.innerText = "נכון מאוד! ⭐";
+            f.innerText = "כל הכבוד! ⭐";
             f.className = "feedback correct";
         } else {
-            f.innerHTML = "טעות. התשובה הנכונה: " + "<span dir='ltr' style='font-weight:bold'>" + correctVal + "</span>";
+            f.innerHTML = "לא נורא, התשובה היא: " + "<span dir='ltr' style='font-weight:bold'>" + correctVal + "</span>";
             f.className = "feedback incorrect";
         }
         document.getElementById('next-btn').classList.remove('hidden');
