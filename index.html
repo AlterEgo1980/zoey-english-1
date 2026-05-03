@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zoey's English App 2026 ⭐</title>
+    <title>Zoey's English App - Pro Edition ⭐</title>
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f0f7ff; text-align: center; padding: 20px; margin: 0; }
-        .container { max-width: 600px; margin: auto; background: white; padding: 25px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 2px solid #e0e0e0; }
+        .container { max-width: 700px; margin: auto; background: white; padding: 25px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 2px solid #e0e0e0; }
         h1 { color: #2c3e50; font-size: 28px; margin-bottom: 10px; }
         .stars { color: #f1c40f; font-size: 24px; margin-bottom: 20px; }
         .menu-btn { background-color: #4a90e2; color: white; border: none; padding: 15px; margin: 8px; border-radius: 12px; cursor: pointer; font-size: 16px; width: 100%; transition: 0.2s; font-weight: bold; }
         .menu-btn:hover { background-color: #357abd; transform: scale(1.02); }
         .hidden { display: none; }
-        .word-box { font-size: 28px; font-weight: bold; margin-bottom: 20px; color: #34495e; }
+        .word-box { font-size: 26px; font-weight: bold; margin-bottom: 20px; color: #34495e; }
         input[type="text"] { width: 90%; padding: 12px; font-size: 18px; border: 2px solid #4a90e2; border-radius: 10px; margin-bottom: 15px; text-align: center; outline: none; }
         .feedback { padding: 15px; border-radius: 10px; margin-top: 15px; font-weight: bold; }
         .correct { background-color: #2ecc71; color: white; }
@@ -22,13 +22,11 @@
         .next-btn { background-color: #34495e; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; width: 100%; font-size: 16px; }
         .opt-btn { background: #fff; border: 2px solid #4a90e2; color: #4a90e2; padding: 12px; margin: 6px; width: 100%; border-radius: 10px; cursor: pointer; font-size: 16px; font-weight: bold; transition: 0.2s; text-align: left; direction: ltr; }
         .opt-btn:hover { background: #eef6ff; }
-        .sentence-box { font-size: 20px; line-height: 1.6; margin-bottom: 20px; background: #fdfdfd; padding: 20px; border-radius: 15px; border-right: 6px solid #8e44ad; text-align: left; direction: ltr; }
+        .sentence-box { font-size: 19px; line-height: 1.6; margin-bottom: 20px; background: #fdfdfd; padding: 20px; border-radius: 15px; border-right: 6px solid #8e44ad; text-align: left; direction: ltr; }
         .help-btn { background-color: #9b59b6; color: white; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 14px; margin-bottom: 10px; display: inline-flex; align-items: center; gap: 5px; }
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); }
         .modal-content { background-color: white; margin: 5% auto; padding: 20px; border-radius: 15px; width: 90%; max-width: 550px; max-height: 85vh; overflow-y: auto; text-align: right; }
         .close { color: #aaa; float: left; font-size: 28px; font-weight: bold; cursor: pointer; }
-        .guide-table { width: 100%; border-collapse: collapse; margin-top: 10px; direction: ltr; font-size: 13px; }
-        .guide-table th, .guide-table td { border: 1px solid #ddd; padding: 8px; text-align: left; }
     </style>
 </head>
 <body>
@@ -41,13 +39,13 @@
         <button class="menu-btn" onclick="startSession(1)">אנגלית ← עברית</button>
         <button class="menu-btn" onclick="startSession(2)">עברית ← אנגלית</button>
         <button class="menu-btn" onclick="startSession(3)">כתיבה (עברית ל-אנגלית)</button>
-        <button class="menu-btn" onclick="startSession(5)">השלמת משפטים (אוצר מילים)</button>
-        <button class="menu-btn" style="background-color: #e67e22;" onclick="startSession(6)">דקדוק: Past Simple / Progressive ✍️</button>
+        <button class="menu-btn" onclick="startSession(5)">השלמת משפטים (100 שאלות)</button>
+        <button class="menu-btn" style="background-color: #e67e22;" onclick="startSession(6)">דקדוק: Past Simple / Progressive (100 שאלות) ✍️</button>
     </div>
 
     <div id="game-zone" class="hidden">
         <div class="score-display">שאלה <span id="q-num">1</span> מתוך 10</div>
-        <button class="help-btn" onclick="toggleHelp()">💡 דף עזרה בדקדוק</button>
+        <button class="help-btn" onclick="toggleHelp()">💡 עזרה בדקדוק</button>
         <div id="sentence-container" class="sentence-box hidden"></div>
         <div class="word-box" id="display-word"></div>
         <div id="options-area"></div>
@@ -61,7 +59,7 @@
     </div>
 
     <div id="summary-zone" class="hidden">
-        <h1>כל הכבוד, זואי! ⭐</h1>
+        <h1>כל הכבוד! ⭐</h1>
         <div class="final-score"><span id="final-grade">0</span></div>
         <button class="menu-btn" onclick="returnToMenu()">תרגול נוסף</button>
     </div>
@@ -70,118 +68,243 @@
 <div id="helpModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="toggleHelp()">&times;</span>
-        <h2 style="text-align: center;">כללי דקדוק: עבר</h2>
-        <hr>
-        <h4>Past Simple (עבר פשוט)</h4>
-        <p>לפעולה שהסתיימה. מילות רמז: yesterday, last year, ago.</p>
-        <p>מבנה: V2 (כמו walked או went).</p>
-        <h4>Past Progressive (עבר ממושך)</h4>
-        <p>לפעולה ארוכה שקרתה בעבר. מילות רמז: While, As.</p>
-        <p>מבנה: was/were + V-ing.</p>
-        <p><b>טיפ:</b> אחרי <b>While</b> יבוא Progressive. אחרי <b>When</b> יבוא לרוב Simple.</p>
+        <h2 style="text-align: center;">כללי דקדוק</h2>
+        <p><b>Past Simple:</b> פעולה שהסתיימה (Yesterday, last week). V2.</p>
+        <p><b>Past Progressive:</b> פעולה ממושכת (While, As). was/were + V-ing.</p>
     </div>
 </div>
 
 <script>
     const vocabulary = [
-        {e: "adapt", h: "להסתגל", s: "It is hard to ______ to a new school at first."},
-        {e: "around", h: "מסביב", s: "We ran ______ the park three times."},
-        {e: "beside", h: "ליד, לצד", s: "Come and sit ______ me on the sofa."},
-        {e: "confident", h: "בטוח", s: "She feels ______ about her English exam."},
-        {e: "escape", h: "לברוח", s: "The bird managed to ______ from the cage."},
-        {e: "force", h: "להכריח", s: "You can't ______ me to eat broccoli!"},
-        {e: "help oneself", h: "להתכבד", s: "Please ______ to some cookies on the table."},
-        {e: "introduce", h: "להציג", s: "Let me ______ you to my best friend."},
-        {e: "lake", h: "אגם", s: "We went swimming in the ______ last summer."},
-        {e: "noisy", h: "רועש", s: "The classroom was very ______ during the break."},
-        {e: "occur", h: "להתרחש", s: "When did the accident ______?"},
-        {e: "region", h: "איזור", s: "It rains a lot in this ______ of the country."},
-        {e: "relax", h: "להירגע", s: "I like to ______ and read a book on Saturdays."},
-        {e: "rise", h: "עלייה", s: "There is a ______ in the number of people using apps."},
-        {e: "space", h: "מרחב, מקום", s: "Is there enough ______ in the car for everyone?"},
-        {e: "surprisingly", h: "באופן מפתיע", s: "______, the test was actually quite easy."},
-        {e: "to do with", h: "קשור ל", s: "This problem has nothing ______ me."},
-        {e: "trend", h: "מגמה", s: "There is a new ______ of wearing vintage clothes."},
-        {e: "adequate", h: "מספיק", s: "The food supply was ______ for the trip."},
-        {e: "attack", h: "לתקוף", s: "The dog began to ______ the fence."},
-        {e: "cause", h: "לגרום", s: "Smoking can ______ serious health problems."},
-        {e: "disease", h: "מחלה", s: "Doctors are working hard to cure the ______."},
-        {e: "expensive", h: "יקר", s: "This watch is too ______ for me to buy."},
-        {e: "look after", h: "לטפל", s: "Can you ______ my cat while I'm away?"},
-        {e: "make something into", h: "להפוך ל", s: "She can ______ old clothes ______ something new."},
-        {e: "release", h: "לשחרר", s: "They will ______ the animals back into the wild."},
-        {e: "satisfied", h: "מסופק", s: "I am very ______ with my final grade."},
-        {e: "aim", h: "מטרה", s: "My ______ is to finish the marathon."},
-        {e: "allow", h: "להרשות", s: "My parents ______ me to stay up late on weekends."},
-        {e: "demand", h: "לדרוש", s: "The workers ______ better working conditions."},
-        {e: "despite", h: "למרות", s: "We went for a walk ______ the rain."},
-        {e: "head", h: "ראש", s: "He is the ______ of the company."},
-        {e: "nearby", h: "קרוב", s: "Is there a supermarket ______?"},
-        {e: "option", h: "אפשרות", s: "I have the ______ to study either French or Spanish."},
-        {e: "permanent", h: "קבוע", s: "This is my ______ address, I won't move."},
-        {e: "plan to", h: "לתכנן ל", s: "I ______ travel to London next year."},
-        {e: "property", h: "רכוש", s: "This bag is my private ______."},
-        {e: "temporary", h: "זמני", s: "It's just a ______ job for the summer."},
-        {e: "abroad", h: "בחו\"ל", s: "Many people love to travel ______."},
-        {e: "add", h: "להוסיף", s: "Don't forget to ______ some salt to the soup."},
-        {e: "aid", h: "עזרה, סיוע", s: "The organization provides ______ to poor families."},
-        {e: "border", h: "גבול", s: "We crossed the ______ between France and Italy."},
-        {e: "channel", h: "ערוץ", s: "What is your favorite TV ______?"},
-        {e: "comfort", h: "נוח", s: "I love the ______ of my own bed."},
-        {e: "community", h: "קהילה", s: "We live in a very friendly ______."},
-        {e: "concerned", h: "מודאג", s: "I am ______ about your health."},
-        {e: "cover", h: "לכסות", s: "Please ______ the food so it stays fresh."},
-        {e: "few", h: "מעטים", s: "Only a ______ people arrived on time."},
-        {e: "institution", h: "מוסד", s: "The university is a famous ______."},
-        {e: "jet", h: "מטוס סילון", s: "The ______ flew across the ocean very fast."},
-        {e: "joy", h: "אושר", s: "The children brought so much ______ to the family."},
-        {e: "kind", h: "טוב לב", s: "Thank you for being so ______ to me."},
-        {e: "offer", h: "להציע", s: "They ______ed me a drink when I arrived."},
-        {e: "philosophy", h: "פילוסופיה", s: "He has a very interesting ______ on life."},
-        {e: "provide", h: "לספק", s: "The school will ______ all the books."},
-        {e: "society", h: "חברה", s: "We must work together to improve our ______."},
-        {e: "brave", h: "אמיץ", s: "The ______ firefighter saved the cat."},
-        {e: "concern", h: "דאגה", s: "The teacher showed ______ for the student."},
-        {e: "destroy", h: "להרוס", s: "The storm ______ed many houses."},
-        {e: "gun", h: "אקדח", s: "He carries a ______ for protection."},
-        {e: "gunfire", h: "יריה", s: "The sound of ______ was heard in the distance."},
-        {e: "killing", h: "הרג", s: "The movie was about the ______ of a king."},
-        {e: "point of view", h: "נקודת מבט", s: "From my ______, this is the best choice."},
-        {e: "shoot", h: "לירות", s: "The hunter did not ______ the deer."},
-        {e: "take care of", h: "לטפל ב", s: "I will ______ the baby tonight."}
+        {e: "adapt", h: "להסתגל"}, {e: "around", h: "מסביב"}, {e: "beside", h: "ליד, לצד"},
+        {e: "confident", h: "בטוח"}, {e: "escape", h: "לברוח"}, {e: "force", h: "להכריח"},
+        {e: "help oneself", h: "להתכבד"}, {e: "introduce", h: "להציג"}, {e: "lake", h: "אגם"},
+        {e: "noisy", h: "רועש"}, {e: "occur", h: "להתרחש"}, {e: "region", h: "איזור"},
+        {e: "relax", h: "להירגע"}, {e: "rise", h: "עלייה"}, {e: "space", h: "מרחב, מקום"},
+        {e: "surprisingly", h: "באופן מפתיע"}, {e: "to do with", h: "קשור ל"}, {e: "trend", h: "מגמה"},
+        {e: "adequate", h: "מספיק"}, {e: "attack", h: "לתקוף"}, {e: "cause", h: "לגרום"},
+        {e: "disease", h: "מחלה"}, {e: "expensive", h: "יקר"}, {e: "look after", h: "לטפל"},
+        {e: "make something into", h: "להפוך ל"}, {e: "release", h: "לשחרר"}, {e: "satisfied", h: "מסופק"},
+        {e: "aim", h: "מטרה"}, {e: "allow", h: "להרשות"}, {e: "demand", h: "לדרוש"},
+        {e: "despite", h: "למרות"}, {e: "head", h: "ראש"}, {e: "nearby", h: "קרוב"},
+        {e: "option", h: "אפשרות"}, {e: "permanent", h: "קבוע"}, {e: "plan to", h: "לתכנן ל"},
+        {e: "property", h: "רכוש"}, {e: "temporary", h: "זמני"}, {e: "abroad", h: "בחו\"ל"},
+        {e: "add", h: "להוסיף"}, {e: "aid", h: "עזרה, סיוע"}, {e: "border", h: "גבול"},
+        {e: "channel", h: "ערוץ"}, {e: "comfort", h: "נוח"}, {e: "community", h: "קהילה"},
+        {e: "concerned", h: "מודאג"}, {e: "cover", h: "לכסות"}, {e: "few", h: "מעטים"},
+        {e: "institution", h: "מוסד"}, {e: "jet", h: "מטוס סילון"}, {e: "joy", h: "אושר"},
+        {e: "kind", h: "טוב לב"}, {e: "offer", h: "להציע"}, {e: "philosophy", h: "פילוסופיה"},
+        {e: "provide", h: "לספק"}, {e: "society", h: "חברה"}, {e: "brave", h: "אמיץ"},
+        {e: "concern", h: "דאגה"}, {e: "destroy", h: "להרוס"}, {e: "gun", h: "אקדח"},
+        {e: "gunfire", h: "יריה"}, {e: "killing", h: "הרג"}, {e: "point of view", h: "נקודת מבט"},
+        {e: "shoot", h: "לירות"}, {e: "take care of", h: "לטפל ב"}
+    ];
+
+    const completionQuestions = [
+        {s: "It was difficult to ______ to the new school rules at first.", e: "adapt"},
+        {s: "The children were playing ______ the lake all afternoon.", e: "around"},
+        {s: "She came and sat ______ her best friend during the movie.", e: "beside"},
+        {s: "You should feel ______ because you studied very hard.", e: "confident"},
+        {s: "The prisoner tried to ______ through a small window.", e: "escape"},
+        {s: "Please don't ______ me to eat something I don't like.", e: "force"},
+        {s: "The host said, 'Please ______ to the cake on the table'.", e: "help oneself"},
+        {s: "I would like to ______ you to my parents.", e: "introduce"},
+        {s: "The water in the ______ was freezing cold this morning.", e: "lake"},
+        {s: "The classroom was so ______ that I couldn't focus.", e: "noisy"},
+        {s: "We did not expect the accident to ______ at that time.", e: "occur"},
+        {s: "This ______ of the country is known for its beautiful mountains.", e: "region"},
+        {s: "After a long day at work, I just want to ______ at home.", e: "relax"},
+        {s: "We saw a significant ______ in the price of expensive cars.", e: "rise"},
+        {s: "Is there enough ______ in the trunk for all our bags?", e: "space"},
+        {s: "______, the test was much easier than we thought.", e: "surprisingly"},
+        {s: "I don't think this problem has anything ______ our project.", e: "to do with"},
+        {s: "Wearing vintage clothes is a popular ______ among teenagers.", e: "trend"},
+        {s: "The food supply was ______ for the entire camping trip.", e: "adequate"},
+        {s: "The dog started to ______ the mailman this morning.", e: "attack"},
+        {s: "Heavy rain can ______ serious floods in this area.", e: "cause"},
+        {s: "Scientists are trying to find a cure for this rare ______.", e: "disease"},
+        {s: "Buying a new jet is extremely ______ for most people.", e: "expensive"},
+        {s: "Can you ______ my dog while I am traveling abroad?", e: "look after"},
+        {s: "She managed to ______ her hobby ______ a successful business.", e: "make something into"},
+        {s: "They decided to ______ the animals back into the wild.", e: "release"},
+        {s: "I am very ______ with the results of my English exam.", e: "satisfied"},
+        {s: "My main ______ is to finish the marathon next year.", e: "aim"},
+        {s: "The teacher will not ______ phones during the test.", e: "allow"},
+        {s: "The workers ______ higher pay and better conditions.", e: "demand"},
+        {s: "We decided to go for a run ______ the heavy rain.", e: "despite"},
+        {s: "He is the ______ of the local medical institution.", e: "head"},
+        {s: "Is there a gas station ______? We are low on fuel.", e: "nearby"},
+        {s: "We have the ______ to stay at home or go to the party.", e: "option"},
+        {s: "I am looking for a ______ job, not a temporary one.", e: "permanent"},
+        {s: "We ______ visit London during the summer holidays.", e: "plan to"},
+        {s: "This house is a private ______; you cannot enter.", e: "property"},
+        {s: "Her job at the lake is only ______, just for the summer.", e: "temporary"},
+        {s: "Many students dream of studying ______ after high school.", e: "abroad"},
+        {s: "Don't forget to ______ your name to the list.", e: "add"},
+        {s: "The organization provides ______ to families in need.", e: "aid"},
+        {s: "The soldiers are guarding the ______ between the two countries.", e: "border"},
+        {s: "I watched a documentary about the region on this ______.", e: "channel"},
+        {s: "The new sofa provides a lot of ______ in the living room.", e: "comfort"},
+        {s: "Our ______ is very friendly and supportive.", e: "community"},
+        {s: "I am very ______ about your safety during the trip.", e: "concerned"},
+        {s: "Please ______ the food so the flies don't touch it.", e: "cover"},
+        {s: "Very ______ people arrived at the noisy party early.", e: "few"},
+        {s: "The university is a famous ______ in this region.", e: "institution"},
+        {s: "The ______ flew across the sky at an incredible speed.", e: "jet"},
+        {s: "Seeing her grandchildren brought her so much ______.", e: "joy"},
+        {s: "It was very ______ of you to help me with the bags.", e: "kind"},
+        {s: "The company will ______ a permanent position to him.", e: "offer"},
+        {s: "Her ______ on life is to always stay positive.", e: "philosophy"},
+        {s: "The school will ______ all the necessary materials.", e: "provide"},
+        {s: "We must follow the rules of our ______.", e: "society"},
+        {s: "The ______ firefighter saved the cat from the tree.", e: "brave"},
+        {s: "The main ______ of the community is the lack of water.", e: "concern"},
+        {s: "The storm threatened to ______ the nearby houses.", e: "destroy"},
+        {s: "It is illegal to carry a ______ without a permit.", e: "gun"},
+        {s: "The sound of ______ was heard near the border.", e: "gunfire"},
+        {s: "The police are investigating the ______ of the guard.", e: "killing"},
+        {s: "From my ______, this trend is not going to last long.", e: "point of view"},
+        {s: "The hunter did not want to ______ the animal.", e: "shoot"},
+        {s: "I will ______ your children while you are at work.", e: "take care of"},
+        {s: "You need to ______ to the noisy environment quickly.", e: "adapt"},
+        {s: "Look ______; the space is beautiful here.", e: "around"},
+        {s: "The lake is right ______ the tall trees.", e: "beside"},
+        {s: "He felt ______ after the brave act.", e: "confident"},
+        {s: "They managed to ______ from the noisy region.", e: "escape"},
+        {s: "Don't ______ me to change my philosophy.", e: "force"},
+        {s: "When you arrive, please ______ to the drinks.", e: "help oneself"},
+        {s: "She will ______ her new project to the institution.", e: "introduce"},
+        {s: "We went fishing in the ______ nearby.", e: "lake"},
+        {s: "The jet was so ______ that it shook the windows.", e: "noisy"},
+        {s: "Did the event ______ during the day or night?", e: "occur"},
+        {s: "There are very few trees in this ______.", e: "region"},
+        {s: "It's important to ______ before an expensive exam.", e: "relax"},
+        {s: "The ______ in gunfire caused much concern.", e: "rise"},
+        {s: "The jet needs a lot of ______ to land safely.", e: "space"},
+        {s: "______, the brave soldier was not hurt.", e: "surprisingly"},
+        {s: "This trend has nothing ______ our community.", e: "to do with"},
+        {s: "The current ______ is to move abroad for work.", e: "trend"},
+        {s: "We don't have ______ space for the property.", e: "adequate"},
+        {s: "The disease could ______ the entire region.", e: "attack"},
+        {s: "The disease did not ______ any permanent damage.", e: "cause"},
+        {s: "She is fighting a serious ______ with a brave attitude.", e: "disease"},
+        {s: "Maintaining a jet is very ______ for the institution.", e: "expensive"},
+        {s: "The society will ______ the children in need.", e: "look after"},
+        {s: "They will ______ the old building ______ a school.", e: "make something into"},
+        {s: "The police will ______ the prisoner tomorrow.", e: "release"},
+        {s: "Are you ______ with the temporary option?", e: "satisfied"},
+        {s: "Our ______ is to provide aid to the community.", e: "aim"},
+        {s: "Will they ______ us to cross the border?", e: "allow"},
+        {s: "The people ______ an explanation for the killing.", e: "demand"},
+        {s: "He remained kind ______ the noisy environment.", e: "despite"},
+        {s: "She was named the ______ of the philosophy department.", e: "head"},
+        {s: "The lake is ______ the expensive property.", e: "nearby"},
+        {s: "Leaving the country was her only ______.", e: "option"},
+        {s: "This is a ______ change, not a temporary one.", e: "permanent"},
+        {s: "We ______ travel around the region next month.", e: "plan to"}
     ];
 
     const grammarQuestions = [
-        {s: "While the brave soldier ______ (look after) the border, he heard gunfire.", a: "was looking after"},
-        {s: "The institution ______ (provide) adequate aid to the community last year.", a: "provided"},
-        {s: "As we ______ (relax) beside the lake, a noisy jet flew over the region.", a: "were relaxing"},
+        {s: "While the brave soldier ______ (guard) the border, he heard gunfire.", a: "was guarding"},
+        {s: "Yesterday, the head of the institution ______ (provide) adequate aid.", a: "provided"},
+        {s: "As we ______ (relax) beside the lake, a noisy jet flew over.", a: "were relaxing"},
         {s: "Surprisingly, the expensive property ______ (rise) in price last month.", a: "rose"},
-        {s: "Despite the disease, she ______ (remain) confident that she would recover.", a: "remained"},
-        {s: "While they ______ (plan to) travel abroad, they added a new option to their list.", a: "were planning to"},
-        {s: "When the accident ______ (occur), the police were blocking the space around the car.", a: "occurred"},
-        {s: "The noisy neighbors ______ (destroy) my comfort while I was trying to sleep.", a: "destroyed"},
-        {s: "He ______ (force) the bird to escape from the cage yesterday.", a: "forced"},
+        {s: "Despite the disease, she ______ (remain) confident during the trial.", a: "remained"},
+        {s: "While they ______ (plan to) travel abroad, they added a new option.", a: "were planning to"},
+        {s: "When the accident ______ (occur), the space around the car was empty.", a: "occurred"},
+        {s: "The noisy neighbors ______ (destroy) my comfort all night yesterday.", a: "destroyed"},
+        {s: "He ______ (force) the prisoner to escape from the cage two days ago.", a: "forced"},
         {s: "While I ______ (take care of) the garden, I found a temporary border.", a: "was taking care of"},
-        {s: "The philosophy teacher ______ (introduce) a new trend during the lesson.", a: "introduced"},
+        {s: "The teacher ______ (introduce) a new trend while the students were listening.", a: "introduced"},
         {s: "They ______ (demand) a permanent solution while the society was suffering.", a: "demanded"},
-        {s: "As the head of the team ______ (offer) an option, everyone felt satisfied.", a: "was offering"},
-        {s: "The gunfire ______ (cause) great concern in the nearby village.", a: "caused"},
-        {s: "While the cat ______ (attack) the mouse, it made a noisy sound.", a: "was attacking"},
-        {s: "I ______ (help oneself) to the food while the host was talking about his trip.", a: "helped myself"},
-        {s: "While we ______ (walk) around the lake, we adapted to the cold weather.", a: "were walking"},
-        {s: "The trend ______ (change) while the institution was studying the region.", a: "changed"},
+        {s: "As the head ______ (offer) an option, everyone felt satisfied.", a: "was offering"},
+        {s: "The gunfire ______ (cause) great concern in the nearby village yesterday.", a: "caused"},
+        {s: "While the dog ______ (attack) the ball, it made a noisy sound.", a: "was attacking"},
+        {s: "I ______ (help oneself) to the food while the host was talking.", a: "helped myself"},
+        {s: "While we ______ (walk) around the lake, we adapted to the cold.", a: "were walking"},
+        {s: "The trend ______ (change) while the institution was studying it.", a: "changed"},
         {s: "He ______ (shoot) the target while everyone was watching him.", a: "shot"},
         {s: "While she ______ (cover) the expensive furniture, she broke a vase.", a: "was covering"},
         {s: "The killing ______ (cause) a big shock while the police were investigating.", a: "caused"},
         {s: "As we ______ (walk) around the region, we saw very few trees.", a: "were walking"},
         {s: "He ______ (not/demand) an apology while we were sitting beside him.", a: "didn't demand"},
-        {s: "While the brave girl ______ (look after) her brother, they played in the space.", a: "was looking after"},
-        {s: "The jet ______ (fly) over the border while the pilot was talking to the base.", a: "was flying"},
+        {s: "While the brave girl ______ (look after) her brother, they played.", a: "was looking after"},
+        {s: "The jet ______ (fly) over the border while the pilot was talking.", a: "was flying"},
         {s: "We ______ (find) a permanent home while we were living abroad.", a: "found"},
         {s: "While the community ______ (discuss) the option, a new problem occurred.", a: "was discussing"},
         {s: "He ______ (not/be) confident while he was presenting his point of view.", a: "wasn't"},
-        {s: "As the sun ______ (rise), we started our long walk around the lake.", a: "was rising"},
-        {s: "The philosophy ______ (change) while the society was developing.", a: "changed"}
+        {s: "As the sun ______ (rise), we started our walk around the lake.", a: "was rising"},
+        {s: "The philosophy ______ (change) while the society was developing.", a: "changed"},
+        {s: "While I ______ (relax), the noisy children started to scream.", a: "was relaxing"},
+        {s: "The disease ______ (spread) quickly through the region last year.", a: "spread"},
+        {s: "While she ______ (look after) the jet, she found a problem.", a: "was looking after"},
+        {s: "They ______ (release) the bird while we were standing nearby.", a: "released"},
+        {s: "While the storm ______ (destroy) the property, we stayed inside.", a: "was destroying"},
+        {s: "He ______ (not/allow) us to enter the institution yesterday.", a: "didn't allow"},
+        {s: "While the head ______ (talk), the gunfire started.", a: "was talking"},
+        {s: "We ______ (provide) adequate space for the event last week.", a: "provided"},
+        {s: "While the price ______ (rise), many people were concerned.", a: "was rising"},
+        {s: "The cat ______ (escape) while I was opening the door.", a: "escaped"},
+        {s: "I ______ (add) some sugar to the coffee while she was looking.", a: "added"},
+        {s: "While the soldiers ______ (shoot), the people ran for cover.", a: "were shooting"},
+        {s: "They ______ (not/satisfied) with the temporary aid we gave.", a: "weren't"},
+        {s: "While the community ______ (grow), they built a new lake.", a: "was growing"},
+        {s: "She ______ (become) kind while she was working at the institution.", a: "became"},
+        {s: "While the jet ______ (land), we heard a noisy sound.", a: "was landing"},
+        {s: "The accident ______ (occur) while he was traveling abroad.", a: "occurred"},
+        {s: "I ______ (not/force) him to stay beside me yesterday.", a: "didn't force"},
+        {s: "While we ______ (adapt) to the region, we met many friends.", a: "were adapting"},
+        {s: "He ______ (aim) for the top while he was studying philosophy.", a: "was aiming"},
+        {s: "The trend ______ (start) while she was living in the community.", a: "started"},
+        {s: "While the brave man ______ (fight) the disease, he stayed positive.", a: "was fighting"},
+        {s: "They ______ (destroy) the old channel while we were watching.", a: "destroyed"},
+        {s: "While I ______ (cover) the baby, the gunfire stopped.", a: "was covering"},
+        {s: "The joy ______ (increase) while the children were playing around.", a: "was increasing"},
+        {s: "He ______ (offer) a permanent job while I was visiting the head.", a: "offered"},
+        {s: "While she ______ (take care of) the property, she found a gun.", a: "was taking care of"},
+        {s: "The institution ______ (provide) few options for the students.", a: "provided"},
+        {s: "While the jet ______ (fly) around, surprisingly it disappeared.", a: "was flying"},
+        {s: "We ______ (not/find) adequate aid while we were searching.", a: "didn't find"},
+        {s: "While the sun ______ (rise), the region looked beautiful.", a: "was rising"},
+        {s: "He ______ (make) the space ______ a garden last summer.", a: "made"},
+        {s: "While the community ______ (suffer), they demanded aid.", a: "was suffering"},
+        {s: "She ______ (relax) beside the lake when the trend started.", a: "was relaxing"},
+        {s: "The jet ______ (land) while the noisy gunfire was heard.", a: "landed"},
+        {s: "While he ______ (study) philosophy, he changed his point of view.", a: "was studying"},
+        {s: "They ______ (not/allow) me to look after the property yesterday.", a: "didn't allow"},
+        {s: "While the brave dog ______ (attack), the noisy cat escaped.", a: "was attacking"},
+        {s: "The disease ______ (cause) many deaths while we were abroad.", a: "caused"},
+        {s: "While I ______ (introduce) my friend, he started to relax.", a: "was introducing"},
+        {s: "He ______ (not/satisfied) with the few options he had.", a: "wasn't"},
+        {s: "While the jet ______ (fly), the head was concerned about the space.", a: "was flying"},
+        {s: "The gunfire ______ (stop) while the soldiers were covering the border.", a: "stopped"},
+        {s: "While the community ______ (rise) against the killing, they felt brave.", a: "was rising"},
+        {s: "She ______ (provide) comfort while the family was mourning.", a: "provided"},
+        {s: "While we ______ (plan to) leave, surprisingly the trend changed.", a: "were planning to"},
+        {s: "The noisy jet ______ (occur) while I was trying to sleep.", a: "occurred"},
+        {s: "While the institution ______ (study) the region, they found a disease.", a: "was studying"},
+        {s: "He ______ (not/shoot) the gun while the children were around.", a: "didn't shoot"},
+        {s: "While she ______ (add) the property, she felt very satisfied.", a: "was adding"},
+        {s: "The society ______ (change) while the philosophy was developing.", a: "changed"},
+        {s: "While we ______ (look after) the lake, the water rose.", a: "were looking after"},
+        {s: "The jet ______ (fly) beside the mountain while it was raining.", a: "was flying"},
+        {s: "He ______ (not/permanent) stay while he was working abroad.", a: "didn't"},
+        {s: "While the brave head ______ (lead), the community followed.", a: "was leading"},
+        {s: "The gunfire ______ (start) while they were discussing philosophy.", a: "started"},
+        {s: "While the society ______ (develop), they provided adequate aid.", a: "was developing"},
+        {s: "She ______ (not/satisfied) while she was working at the lake.", a: "wasn't"},
+        {s: "While the jet ______ (take off), the noisy engine caused concern.", a: "was taking off"},
+        {s: "The killing ______ (occur) while the border was open.", a: "occurred"},
+        {s: "While I ______ (relax) around the house, I felt much joy.", a: "was relaxing"},
+        {s: "He ______ (shoot) at the target while the noisy crowd watched.", a: "shot"},
+        {s: "While the disease ______ (attack), the institution worked hard.", a: "was attacking"},
+        {s: "They ______ (provide) few options while the space was limited.", a: "provided"},
+        {s: "While the jet ______ (fly) abroad, the head stayed nearby.", a: "was flying"},
+        {s: "The gunfire ______ (destroy) the peace while we were eating.", a: "destroyed"},
+        {s: "While the brave girl ______ (take care of) the baby, she smiled.", a: "was taking care of"},
+        {s: "She ______ (not/force) us while we were studying philosophy.", a: "didn't force"},
+        {s: "While the trend ______ (grow), the society adapted quickly.", a: "was growing"},
+        {s: "The jet ______ (fly) over the region while surprisingly it was sunny.", a: "was flying"}
     ];
 
     let sessionWords = [];
@@ -204,7 +327,11 @@
         currentMode = mode;
         score = 0;
         currentIndex = 0;
-        let pool = (mode === 6 ? [...grammarQuestions] : [...vocabulary]);
+        let pool;
+        if (mode === 6) pool = [...grammarQuestions];
+        else if (mode === 5) pool = [...completionQuestions];
+        else pool = [...vocabulary];
+        
         sessionWords = pool.sort(() => 0.5 - Math.random()).slice(0, 10);
         document.getElementById('menu').classList.add('hidden');
         document.getElementById('game-zone').classList.remove('hidden');
@@ -231,6 +358,11 @@
             sentContainer.innerText = item.s;
             display.innerText = "הקלידי את ההטיה הנכונה:";
             inputArea.classList.remove('hidden');
+        } else if (currentMode === 5) { 
+            sentContainer.classList.remove('hidden');
+            sentContainer.innerText = item.s;
+            display.innerText = "בחרי את המילה המתאימה:";
+            generateOptions(item.e, 'e');
         } else if (currentMode === 1) { 
             display.innerText = item.e;
             generateOptions(item.h, 'h');
@@ -240,11 +372,6 @@
         } else if (currentMode === 3) { 
             display.innerText = item.h;
             inputArea.classList.remove('hidden');
-        } else if (currentMode === 5) { 
-            sentContainer.classList.remove('hidden');
-            sentContainer.innerText = item.s;
-            display.innerText = "בחרי את המילה המתאימה:";
-            generateOptions(item.e, 'e');
         }
     }
 
@@ -271,7 +398,8 @@
     function checkAnswer() {
         const item = sessionWords[currentIndex];
         const input = document.getElementById('user-input').value.trim().toLowerCase();
-        let correctVal = (currentMode === 6 ? item.a : item.e);
+        let correctVal = (currentMode === 6 ? item.a : (currentMode === 5 ? item.e : item.e));
+        if (currentMode === 3) correctVal = item.e;
         showFeedback(input === correctVal.toLowerCase(), correctVal);
     }
 
@@ -280,10 +408,10 @@
         f.classList.remove('hidden');
         if(isCorrect) {
             score++;
-            f.innerText = "כל הכבוד! ⭐";
+            f.innerText = "מצוין! ⭐";
             f.className = "feedback correct";
         } else {
-            f.innerHTML = "לא נורא, התשובה היא: " + "<span dir='ltr' style='font-weight:bold'>" + correctVal + "</span>";
+            f.innerHTML = "לא נורא, התשובה היא: " + "<span dir='ltr'>" + correctVal + "</span>";
             f.className = "feedback incorrect";
         }
         document.getElementById('next-btn').classList.remove('hidden');
